@@ -1,0 +1,32 @@
+name: locals
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        locals: ['en', 'he']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Server
+        uses: ./actions/setup-server
+
+      - name: Check Missing Translations for ${{ matrix.locals }}
+        run: |
+          MISSING=$(php artisan translations:find-missing --print --source=${{ matrix.locals }})
+          LINES=$(echo "$MISSING" | wc -l)
+
+          if [ "$LINES" -gt 1 ]; then
+            echo "Found missing translations for ${{ matrix.locals }}: $MISSING"
+            exit 1
+          else
+            echo "No missing translations for ${{ matrix.locals }}"
+          fi
