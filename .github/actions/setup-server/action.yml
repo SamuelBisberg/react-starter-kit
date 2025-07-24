@@ -1,0 +1,51 @@
+name: setup-server
+description: Sets up the server environment for the application.
+
+inputs:
+  php-version:
+    description: 'The PHP version to use'
+    required: true
+    default: '8.4'
+  node-version:
+    description: 'The Node.js version to use'
+    required: true
+    default: '22'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '${{ inputs.php-version }}'
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '${{ inputs.node-version }}'
+        cache: 'npm'
+
+    - name: Install Node Dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Build Assets
+      shell: bash
+      run: npm run build
+
+    - name: Install Composer Dependencies
+      shell: bash
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+    - name: Copy Environment File
+      shell: bash
+      run: cp .env.example .env
+
+    - name: Generate Application Key
+      shell: bash
+      run: php artisan key:generate
