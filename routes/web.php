@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\PlaygroundController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+if (config('app.debug')) {
+    Route::get('playground', PlaygroundController::class)->name('playground');
+}
 
 Route::get('/', function () {
     return Inertia::render('welcome');
