@@ -1,0 +1,11 @@
+{
+  "A reset link will be sent if the account exists.": "קישור לאיפוס יישלח אם החשבון קיים.",
+  "auth.failed": "האימות נכשל.",
+  "auth.failed.missing": "האימות נכשל. אנא נסה שוב.",
+  "auth.password": "סיסמה",
+  "auth.password.missing": "נדרשת סיסמה.",
+  "auth.throttle": "יותר מדי ניסיונות כניסה. אנא נסה שוב מאוחר יותר.",
+  "auth.throttle.missing": "יותר מדי ניסיונות כניסה. אנא המתן לפני שתנסה שוב.",
+  "foo": "foo",
+  "!": "!"
+}
