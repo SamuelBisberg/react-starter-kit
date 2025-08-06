@@ -1,0 +1,29 @@
+name: typescript-transform
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  types:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Server
+        uses: ./.github/actions/setup-server
+
+      - name: Run TypeScript transformation
+        run: |
+          generated_types=$(mktemp)
+          php artisan typescript:transform --silent --output="$generated_types" || true
+
+          current_types=$(cat "$GITHUB_WORKSPACE/resources/js/types/generated.d.ts")
+
+          if [ "$(tr -d '[:space:]' < "$generated_types")" != "$(echo "$current_types" | tr -d '[:space:]')" ]; then
+            echo "Generated types differ from current types."
+            echo "Differences:"
+            diff -u <(echo "$current_types") <(cat "$generated_types") || true
+            exit 1
+          fi

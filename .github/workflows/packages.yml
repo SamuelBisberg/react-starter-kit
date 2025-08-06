@@ -1,0 +1,45 @@
+name: Check Dependency Updates
+
+on:
+  schedule:
+    - cron: '0 4 * * 1-5' # Every weekday at 4 AM UTC
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  check-composer-updates:
+    name: Check PHP Composer Updates
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4' # change to latest if 8.4 not yet stable
+          tools: composer:v2
+
+      - name: Install composer dependencies (no dev)
+        run: composer install --no-dev --no-progress --no-scripts
+
+      - name: Show outdated PHP packages
+        run: composer outdated --direct
+
+  check-npm-updates:
+    name: Check Node (NPM) Updates
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies using package-lock.json
+        run: npm ci
+
+      - name: Show outdated JS packages
+        run: npm outdated
