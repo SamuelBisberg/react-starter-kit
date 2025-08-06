@@ -15,10 +15,11 @@ jobs:
         uses: ./.github/actions/setup-server
 
       - name: Check if TypeScript types are up to date
+        shell: bash
         run: |
           generated_types_file=$(mktemp)
           current_types_file="$GITHUB_WORKSPACE/resources/js/types/generated.d.ts"
-          
+
           echo "Generating new types for comparison with verbose output..."
           # The -vvv flag provides maximum verbosity to help debug the setup
           php artisan typescript:transform --silent --output="$generated_types_file" -vvv
@@ -38,7 +39,7 @@ jobs:
             
             echo "--- Differences ---"
             # Show the actual differences to make debugging easier
-            diff -u "$current_types_file" "$generated_types_file" || true
+            diff -u "$current_types_file" "$generated_types_file"
             
             exit 1
           fi
