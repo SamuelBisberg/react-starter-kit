@@ -9,6 +9,7 @@ This is a fork of the [Laravel + React Starter Kit](https://github.com/laravel/r
 - **Laravel Translatable & Translations**: Fully translated into Hebrew & supports translatable columns with [spatie/laravel-translatable](https://spatie.be/docs/laravel-translatable)
 - **MinIO & Media Library**: For file uploads and media management.
 - **Sail Included**: Docker support with Laravel Sail for easy local development.
+- **Blueprint**: Uses [laravel-shift/blueprint](https://blueprint.laravelshift.com/) for rapid application development.
 
 And much more!
 
@@ -22,6 +23,16 @@ From a Linux distro of your choice, you will need:
 - [Bun](https://bun.sh/docs/install) - JavaScript runtime.
 - [Node.js](https://nodejs.org/en/download/) - JavaScript runtime environment.
 - [PHP 8.4 or higher and Composer](https://laravel.com/docs/#installing-php)
+
+## Getting Started
+
+Edit `blueprint.yaml` to define your application structure and features. You can use the [Blueprint documentation](https://blueprint.laravelshift.com/) to learn how to define your models, controllers, and other components.
+
+Finelly Create your models, controllers, and other components using Blueprint:
+
+```bash
+sail artisan blueprint:build
+```
 
 ## Installation
 
