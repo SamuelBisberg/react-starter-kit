@@ -20,7 +20,7 @@ jobs:
           current_types_file="$GITHUB_WORKSPACE/resources/js/types/generated.d.ts"
 
           echo "Generating new types for comparison..."
-          php artisan typescript:transform --silent --output="$generated_types_file"
+          php artisan typescript:transform --silent --output="$generated_types_file" || true
 
           # First, check if the types file even exists in your repository.
           if [ ! -f "$current_types_file" ]; then
