@@ -10,6 +10,7 @@ This is a fork of the [Laravel + React Starter Kit](https://github.com/laravel/r
 - **MinIO & Media Library**: For file uploads and media management.
 - **Sail Included**: Docker support with Laravel Sail for easy local development.
 - **Blueprint**: Uses [laravel-shift/blueprint](https://blueprint.laravelshift.com/) for rapid application development.
+- **Workos**: Integrated for SSO and OAuth flows with [workos.com](https://workos.com).
 
 And much more!
 
@@ -183,3 +184,18 @@ You have Laravels's additional types such as `Paginator`, `EnumTtait` with usefu
 In addition to the default validation rules, We have added the following custom validation rule:
 
 - **Phone**: Validates that the input is a valid phone number using the package [propaganistas/laravel-phone](https://github.com/propaganistas/laravel-phone).
+
+## Workos
+
+The application integrates with [WorkOS](https://workos.com) for SSO and OAuth flows. You ca anable it in the `.env` file:
+
+```env
+WORKOS_ENABLED=true
+WORKOS_CLIENT_ID=your-client-id
+WORKOS_CLIENT_SECRET=your-client-secret
+```
+
+*Note:* Make Sure to set redirect URIs in your WorkOS dashboard to match your application URLs.
+
+- *Redirect URIs*: `http://localhost/authenticate`
+- *App homepage URL*: `http://localhost`

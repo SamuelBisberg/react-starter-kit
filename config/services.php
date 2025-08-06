@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'workos' => [
+        'enabled' => env('WORKOS_ENABLED', false),
+        'api_key' => env('WORKOS_API_KEY'),
+        'client_id' => env('WORKOS_CLIENT_ID'),
+        'redirect_uri' => env('WORKOS_REDIRECT_URI', config('app.url') . '/authenticate'),
+    ],
+
 ];
