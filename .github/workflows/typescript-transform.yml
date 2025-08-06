@@ -14,21 +14,32 @@ jobs:
       - name: Setup Server
         uses: ./.github/actions/setup-server
 
-      - name: Run TypeScript transformation
+      - name: Check if TypeScript types are up to date
         run: |
-          generated_types=$(mktemp)
-          echo "Generated types will be saved to: $generated_types"
-          php artisan typescript:transform --output="$generated_types" || true
+          generated_types_file=$(mktemp)
+          current_types_file="$GITHUB_WORKSPACE/resources/js/types/generated.d.ts"
 
-          current_types=$(cat "$GITHUB_WORKSPACE/resources/js/types/generated.d.ts")
+          echo "Generating new types for comparison..."
+          php artisan typescript:transform --silent --output="$generated_types_file"
 
-          if [ "$(tr -d '[:space:]' < "$generated_types")" != "$(echo "$current_types" | tr -d '[:space:]')" ]; then
-            echo "Generated types differ from current types."
-            echo "Generated types:"
-            cat "$generated_types"
-            echo "Current types:"
-            echo "$current_types"
-            echo "Differences:"
-            diff -u <(cat "$generated_types") <(echo "$current_types") || true
+          # First, check if the types file even exists in your repository.
+          if [ ! -f "$current_types_file" ]; then
+            echo "::error::The types file '$current_types_file' does not exist."
+            echo "Please generate it for the first time by running 'php artisan typescript:transform' and commit the result."
             exit 1
           fi
+
+          # Use the 'diff' command to compare the committed file with the generated one.
+          # 'diff' will exit with a non-zero status code if the files are different.
+          if ! diff -q "$current_types_file" "$generated_types_file"; then
+            echo "::error::Generated TypeScript types are out of sync with the repository."
+            echo "Please run 'php artisan typescript:transform' locally and commit the changes."
+            
+            echo "--- Differences ---"
+            # Show the actual differences to make debugging easier
+            diff -u "$current_types_file" "$generated_types_file" || true
+            
+            exit 1
+          fi
+
+          echo "✅ TypeScript types are up to date."
