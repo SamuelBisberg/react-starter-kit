@@ -43,3 +43,4 @@ jobs:
           fi
 
           echo "✅ TypeScript types are up to date."
+          exit 0
