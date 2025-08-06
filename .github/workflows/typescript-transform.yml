@@ -17,13 +17,18 @@ jobs:
       - name: Run TypeScript transformation
         run: |
           generated_types=$(mktemp)
-          php artisan typescript:transform --silent --output="$generated_types" || true
+          echo "Generated types will be saved to: $generated_types"
+          php artisan typescript:transform --output="$generated_types" || true
 
           current_types=$(cat "$GITHUB_WORKSPACE/resources/js/types/generated.d.ts")
 
           if [ "$(tr -d '[:space:]' < "$generated_types")" != "$(echo "$current_types" | tr -d '[:space:]')" ]; then
             echo "Generated types differ from current types."
+            echo "Generated types:"
+            cat "$generated_types"
+            echo "Current types:"
+            echo "$current_types"
             echo "Differences:"
-            diff -u <(echo "$current_types") <(cat "$generated_types") || true
+            diff -u <(cat "$generated_types") <(echo "$current_types") || true
             exit 1
           fi
