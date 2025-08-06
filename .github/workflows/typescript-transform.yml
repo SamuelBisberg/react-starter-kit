@@ -18,9 +18,10 @@ jobs:
         run: |
           generated_types_file=$(mktemp)
           current_types_file="$GITHUB_WORKSPACE/resources/js/types/generated.d.ts"
-
-          echo "Generating new types for comparison..."
-          php artisan typescript:transform --silent --output="$generated_types_file" || true
+          
+          echo "Generating new types for comparison with verbose output..."
+          # The -vvv flag provides maximum verbosity to help debug the setup
+          php artisan typescript:transform --silent --output="$generated_types_file" -vvv
 
           # First, check if the types file even exists in your repository.
           if [ ! -f "$current_types_file" ]; then
@@ -43,4 +44,3 @@ jobs:
           fi
 
           echo "✅ TypeScript types are up to date."
-          exit 0
