@@ -1,11 +1,6 @@
 {
     "auth.password": "Password",
-    "auth.password.missing": "Password is required.",
     "A reset link will be sent if the account exists.": "A reset link will be sent if the account exists.",
-    "auth.failed": "Authentication failed.",
-    "auth.failed.missing": "Authentication failed. Please try again.",
-    "auth.throttle": "Too many login attempts. Please try again later.",
-    "auth.throttle.missing": "Too many login attempts. Please wait before retrying.",
-    "!": "!",
-    "foo": null
+    "auth.failed": "These credentials do not match our records.",
+    "auth.throttle": "Too many login attempts. Please try again in :seconds seconds."
 }
