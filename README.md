@@ -46,25 +46,25 @@ sail artisan blueprint:build
    cd <your-repo-name>
    ```
 
-2. Run app with Sail:
-
-   ```bash
-   # Don't forget to add the alias to your shell config file (e.g., .bashrc, .zshrc)
-   # alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
-   sail up -d
-   ```
-
-3. Install dependencies:
+2. Install dependencies:
 
    ```bash
    sail composer install
    sail npm install # or `sail bun install`
    ```
 
-4. Copy the `.env.example` file to `.env`:
+3. Copy the `.env.example` file to `.env`:
 
    ```bash
    cp .env.example .env
+   ```
+
+4. Run app with Sail:
+
+   ```bash
+   # Don't forget to add the alias to your shell config file (e.g., .bashrc, .zshrc)
+   # alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
+   sail up -d
    ```
 
 5. Generate application key:
