@@ -7,11 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\AlwaysProp;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\RecordTypeScriptType;
-use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 use Spatie\TypeScriptTransformer\Attributes\TypeScriptType;
 use Tighten\Ziggy\Ziggy;
 
-#[TypeScript]
 class InertiaRequestData extends Data
 {
     public function __construct(
