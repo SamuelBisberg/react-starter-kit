@@ -27,9 +27,9 @@ From a Linux distro of your choice, you will need:
 
 ## Getting Started
 
-Edit `blueprint.yaml` to define your application structure and features. You can use the [Blueprint documentation](https://blueprint.laravelshift.com/) to learn how to define your models, controllers, and other components.
+After the installation you can edit `blueprint.yaml` to define your application structure and features. You can use the [Blueprint documentation](https://blueprint.laravelshift.com/) to learn how to define your models, controllers, and other components.
 
-Finelly Create your models, controllers, and other components using Blueprint:
+Finally Create your models, controllers, and other components using Blueprint:
 
 ```bash
 sail artisan blueprint:build
