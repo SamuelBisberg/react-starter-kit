@@ -64,8 +64,8 @@ class BackupHealthWidget extends ChartWidget
 
         return [
             'labels' => [
-                "Used ({$usedStorage}MB)",
-                "Available ({$availableStorage}MB)"
+                "Used ({$usedStorage}GB)",
+                "Available ({$availableStorage}GB)"
             ],
             'datasets' => [
                 [
