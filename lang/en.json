@@ -2,5 +2,6 @@
     "auth.password": "Password",
     "A reset link will be sent if the account exists.": "A reset link will be sent if the account exists.",
     "auth.failed": "These credentials do not match our records.",
-    "auth.throttle": "Too many login attempts. Please try again in :seconds seconds."
+    "auth.throttle": "Too many login attempts. Please try again in :seconds seconds.",
+    "Not verified": "Not verified"
 }
