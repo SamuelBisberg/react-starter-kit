@@ -19,6 +19,8 @@ class BackupHealthWidget extends ChartWidget
 
     protected static bool $isLazy = true;
 
+    protected static ?int $sort = 2;
+
     public static function canView(): bool
     {
         return (bool)config('backup.enabled');

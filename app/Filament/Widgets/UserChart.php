@@ -10,6 +10,8 @@ use Flowframe\Trend\Trend;
 
 class UserChart extends StatsOverviewWidget
 {
+    protected static ?int $sort = 1;
+
     protected function getStats(): array
     {
         $trand = Trend::model(User::class)

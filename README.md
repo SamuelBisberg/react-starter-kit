@@ -13,6 +13,7 @@ This is a fork of the [Laravel + React Starter Kit](https://github.com/laravel/r
 - **Workos**: Integrated for SSO and OAuth flows with [workos.com](https://workos.com).
 - **Admin Panel**: Built with [Filament](https://filamentadmin.com/) for a beautiful and responsive admin interface.
 - **Backup**: Integrated with [spatie/laravel-backup](https://spatie.be/docs/laravel-backup) for easy backup management.
+- **Monitoring**: Integrated with [laravel-pulse](https://laravel.com/docs/pulse) for application monitoring.
 
 And much more!
 
@@ -153,24 +154,6 @@ Create a `Data` class with:
 sail artisan make:data <DataClassName>
 ```
 
-Annotate your data classes with `TypeScript` to generate TypeScript types:
-
-```php
-use Spatie\LaravelData\Data;
-use Spatie\TypeScriptTransformer\Attributes\TypeScript;
-
-#[TypeScript]
-class UserData extends Data
-{
-    public function __construct(
-        public string $name,
-        public string $email,
-        // ...
-    ) {}
-}
-
-```
-
 Then, generate the TypeScript types with:
 
 ```bash
@@ -189,13 +172,13 @@ In addition to the default validation rules, We have added the following custom 
 
 ## Workos
 
-The application integrates with [WorkOS](https://workos.com) for SSO and OAuth flows. You ca anable it in the `.env` file:
+The application integrates with [WorkOS](https://workos.com) for SSO and OAuth flows. You can enable it in the `.env` file:
 
-```env
-WORKOS_ENABLED=true
-WORKOS_CLIENT_ID=your-client-id
-WORKOS_CLIENT_SECRET=your-client-secret
-```
+| Environment Variable   | Description & How to get it                                                                         |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| `WORKOS_ENABLED`       | Enables or disables WorkOS SSO functionality. Set to `true` to enable, `false` to disable           |
+| `WORKOS_CLIENT_ID`     | Your WorkOS application client ID. Get from your WorkOS dashboard under Applications → Your App     |
+| `WORKOS_CLIENT_SECRET` | Your WorkOS application client secret. Get from your WorkOS dashboard under Applications → Your App |
 
 *Note:* Make Sure to set redirect URIs in your WorkOS dashboard to match your application URLs.
 
