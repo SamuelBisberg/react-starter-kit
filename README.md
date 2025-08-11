@@ -11,6 +11,8 @@ This is a fork of the [Laravel + React Starter Kit](https://github.com/laravel/r
 - **Sail Included**: Docker support with Laravel Sail for easy local development.
 - **Blueprint**: Uses [laravel-shift/blueprint](https://blueprint.laravelshift.com/) for rapid application development.
 - **Workos**: Integrated for SSO and OAuth flows with [workos.com](https://workos.com).
+- **Admin Panel**: Built with [Filament](https://filamentadmin.com/) for a beautiful and responsive admin interface.
+- **Backup**: Integrated with [spatie/laravel-backup](https://spatie.be/docs/laravel-backup) for easy backup management.
 
 And much more!
 
@@ -199,3 +201,16 @@ WORKOS_CLIENT_SECRET=your-client-secret
 
 - *Redirect URIs*: `http://localhost/authenticate`
 - *App homepage URL*: `http://localhost`
+
+## Backup
+
+The application uses [spatie/laravel-backup](https://spatie.be/docs/laravel-backup) for backup management. You can configure the backup settings in the `.env` file:
+
+| Environment Variable      | Description                                                  |
+| ------------------------- | ------------------------------------------------------------ |
+| `BACKUP_ENABLED`          | Enables or disables the backup functionality                 |
+| `BACKUP_DISK`             | Specifies the storage disk for backups (e.g., `s3`, `local`) |
+| `BACKUP_MAX_STORAGE`      | Maximum storage size in GB for backup retention              |
+| `BACKUP_ARCHIVE_PASSWORD` | Optional password to encrypt backup archives                 |
+
+You can also monitor the backup status using the `BackupHealthWidget` in the admin panel.
