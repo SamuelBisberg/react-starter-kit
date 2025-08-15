@@ -96,6 +96,7 @@ You can use the `Playground` at [http://localhost/playground](http://localhost/p
 
 - [The Controller](/app/Http/Controllers/PlaygroundController.php) - You can modify the controller to test different scenarios.
 - [The View](/resources/js/pages/playground/index.tsx) - You can modify the view to test different scenarios.
+- [Playground Command](/app/Console/Commands/PlaygroundCommand.php) - Run `php artisan app:playground`.
 
 ## File Uploads w/ MinIO & Media Library
 
