@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use Carbon\CarbonImmutable;
 use Spatie\LaravelData\Data;
 
 class UserData extends Data
@@ -11,7 +12,7 @@ class UserData extends Data
         public string $email,
         public ?string $avatar,
         public ?string $email_verified_at,
-        public string $created_at,
-        public string $updated_at
+        public CarbonImmutable $created_at,
+        public ?CarbonImmutable $updated_at,
     ) {}
 }
