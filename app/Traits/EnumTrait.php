@@ -15,12 +15,20 @@ trait EnumTrait
          * Convert enum cases to a collection with additional properties.
          */
         return collect(self::cases())
-            ->map(fn ($case) => [
+            ->map(fn($case) => [
                 'value' => $case->value,
                 'name' => $case->name,
                 'label' => method_exists($case, 'label') ? $case->label() : null,
                 'description' => method_exists($case, 'description') ? $case->description() : null,
                 'color' => method_exists($case, 'color') ? $case->color() : null,
             ]);
+    }
+
+    /**
+     * Pluck values from the enum collection.
+     */
+    public static function plucked(string $keyField = 'value', string $valueField = 'label'): Collection
+    {
+        return self::toCollection()->pluck($valueField, $keyField);
     }
 }

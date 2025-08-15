@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 enum PermissionEnum: string
 {
+    use EnumTrait;
+
     // Core CRUD
     case VIEW = 'view';
     case CREATE = 'create';

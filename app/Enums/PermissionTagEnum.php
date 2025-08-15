@@ -2,8 +2,12 @@
 
 namespace App\Enums;
 
+use App\Traits\EnumTrait;
+
 enum PermissionTagEnum: string
 {
+    use EnumTrait;
+
     case RECORDS = 'records';
     case HISTORY = 'history';
     case IMPORT_EXPORT = 'import_export';
