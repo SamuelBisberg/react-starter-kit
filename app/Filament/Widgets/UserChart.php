@@ -30,7 +30,7 @@ class UserChart extends StatsOverviewWidget
                 ->icon(Heroicon::ArrowTrendingUp)
                 ->description('New users in the last month')
                 ->chartColor($trandColor)
-                ->chart($trand->pluck('aggregate'))
+                ->chart($trand->pluck('aggregate')),
 
         ];
     }

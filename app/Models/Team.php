@@ -12,7 +12,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Permission\Models\Role;
 
-class Team extends Model implements Sortable, BelongsToUserInterface
+class Team extends Model implements BelongsToUserInterface, Sortable
 {
     /** @use HasFactory<\Database\Factories\TeamFactory> */
     use HasFactory, SortableTrait;

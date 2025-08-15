@@ -37,8 +37,8 @@ class InertiaRequestData extends Data
             errors: $errors,
             user: $user ? UserData::from($user) : null,
             team: $currentTeam ? TeamData::from($currentTeam) : null,
-            can: fn() => $user?->getPermissionsViaRoles() ?: [],
-            ziggy: fn(): array => [
+            can: fn () => $user?->getPermissionsViaRoles() ?: [],
+            ziggy: fn (): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],

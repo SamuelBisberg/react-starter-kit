@@ -15,7 +15,7 @@ trait EnumTrait
          * Convert enum cases to a collection with additional properties.
          */
         return collect(self::cases())
-            ->map(fn($case) => [
+            ->map(fn ($case) => [
                 'value' => $case->value,
                 'name' => $case->name,
                 'label' => method_exists($case, 'label') ? $case->label() : null,

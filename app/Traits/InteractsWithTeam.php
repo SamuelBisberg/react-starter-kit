@@ -11,8 +11,9 @@ use Spatie\Permission\Contracts\Role;
  */
 trait InteractsWithTeam
 {
-    static string $TEAM_ID_FIELD_NAME = 'current_team_id';
-    static int $TEAM_ID_COOKIE_EXPIRATION = 60 * 24 * 90; // 90 days = 3 months
+    public static string $TEAM_ID_FIELD_NAME = 'current_team_id';
+
+    public static int $TEAM_ID_COOKIE_EXPIRATION = 60 * 24 * 90; // 90 days = 3 months
 
     protected ?Team $currentTeam = null;
 

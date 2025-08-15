@@ -25,8 +25,8 @@ class PermissionSeeder extends Seeder
 
         // // Seed permissions tags
         collect(PermissionTagEnum::cases())
-            ->map(fn(PermissionTagEnum $permissionTagEnum) => Tag::findOrCreate($permissionTagEnum->label(), Permission::class))
-            ->each(fn(Tag $tag) => $tag->setTranslations('name', TranslationUtils::translatedToAllLocales($tag->name)->toArray()));
+            ->map(fn (PermissionTagEnum $permissionTagEnum) => Tag::findOrCreate($permissionTagEnum->label(), Permission::class))
+            ->each(fn (Tag $tag) => $tag->setTranslations('name', TranslationUtils::translatedToAllLocales($tag->name)->toArray()));
 
         // Seed permissions
         collect(PermissionEnum::cases())->each(function (PermissionEnum $permissionEnum) {

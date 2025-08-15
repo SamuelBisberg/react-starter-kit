@@ -24,7 +24,7 @@ class UsersTable
                     ->label('Verified')
                     ->boolean()
                     ->default(false)
-                    ->tooltip(fn($state) => $state ? $state?->format('Y-m-d H:i') : __('Not verified')),
+                    ->tooltip(fn ($state) => $state ? $state?->format('Y-m-d H:i') : __('Not verified')),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -4,10 +4,10 @@ namespace App\Filament\Widgets;
 
 use Filament\Support\Colors\Color;
 use Filament\Widgets\ChartWidget;
-use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 use Spatie\Backup\Config\MonitoredBackupsConfig;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatus;
-use \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
+use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
+use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
 
 class BackupHealthWidget extends ChartWidget
 {
@@ -23,7 +23,7 @@ class BackupHealthWidget extends ChartWidget
 
     public static function canView(): bool
     {
-        return (bool)config('backup.enabled');
+        return (bool) config('backup.enabled');
     }
 
     public function __construct()
@@ -34,7 +34,7 @@ class BackupHealthWidget extends ChartWidget
 
     public function getHeading(): string
     {
-        return "Backup Health";
+        return 'Backup Health';
     }
 
     public function getDescription(): string
@@ -65,7 +65,7 @@ class BackupHealthWidget extends ChartWidget
         return [
             'labels' => [
                 "Used ({$usedStorage}GB)",
-                "Available ({$availableStorage}GB)"
+                "Available ({$availableStorage}GB)",
             ],
             'datasets' => [
                 [

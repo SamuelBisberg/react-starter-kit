@@ -18,7 +18,7 @@ class LaravelPulseWidget extends StatsOverviewWidget
                 ->color('primary')
                 ->description('Monitor with Laravel Pulse.')
                 ->descriptionIcon('heroicon-o-arrow-top-right-on-square')
-                ->url(url(config('pulse.path')), shouldOpenInNewTab: true)
+                ->url(url(config('pulse.path')), shouldOpenInNewTab: true),
         ];
     }
 }

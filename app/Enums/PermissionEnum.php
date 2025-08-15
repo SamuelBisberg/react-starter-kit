@@ -10,7 +10,7 @@ enum PermissionEnum: string
     case UPDATE = 'update';
     case DELETE = 'delete';
 
-        // Data Operations
+    // Data Operations
     case EXPORT = 'export';
     case IMPORT = 'import';
     case ARCHIVE = 'archive';
@@ -19,11 +19,11 @@ enum PermissionEnum: string
     case DUPLICATE = 'duplicate';
     case MERGE = 'merge';
 
-        // Communication / Interaction
+    // Communication / Interaction
     case COMMENT = 'comment';
     case ASSIGN = 'assign';
 
-        // System-Level
+    // System-Level
     case MANAGE_SETTINGS = 'manage_settings';
     case MANAGE_PERMISSIONS = 'manage_permissions';
 

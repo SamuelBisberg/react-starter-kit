@@ -22,8 +22,8 @@ class PolicyUtils
             ->whereIn('id', $user->teams()->union($user->ownedTeams())->select('id'))
             ->whereIn('id', $user->when(
                 $model instanceof User,
-                fn() => $model->teams()->union($model->ownedTeams())->select('id'),
-                fn() => $model->teams()->select('id')
+                fn () => $model->teams()->union($model->ownedTeams())->select('id'),
+                fn () => $model->teams()->select('id')
             ))
             ->exists();
     }

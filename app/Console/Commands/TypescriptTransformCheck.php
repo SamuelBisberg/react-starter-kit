@@ -18,7 +18,7 @@ class TypescriptTransformCheck extends Command
      *
      * @var string
      */
-    protected $description = "Checks if `typescript:transform` command is up-to-date with the types in the app.";
+    protected $description = 'Checks if `typescript:transform` command is up-to-date with the types in the app.';
 
     /**
      * Execute the console command.
@@ -32,16 +32,17 @@ class TypescriptTransformCheck extends Command
 
         try {
             $this->call('typescript:transform', [
-            '--silent' => true,
-            '--output' => basename($generatedTypesFile)
+                '--silent' => true,
+                '--output' => basename($generatedTypesFile),
             ]);
         } catch (\Throwable) {
             $this->warn('typescript:transform failed, but continuing...');
         }
 
-        if (!file_exists($currentTypesFile)) {
+        if (! file_exists($currentTypesFile)) {
             $this->error("The types file '{$currentTypesFile}' does not exist.");
             $this->line("Please generate it for the first time by running 'php artisan typescript:transform' and commit the result.");
+
             return 1;
         }
 
@@ -52,11 +53,13 @@ class TypescriptTransformCheck extends Command
             $diff = shell_exec(sprintf('diff -u %s %s', escapeshellarg($currentTypesFile), escapeshellarg($generatedTypesFile)));
             $this->line($diff ?: '(No diff output)');
             @unlink($generatedTypesFile);
+
             return 1;
         }
 
         $this->info('✅ TypeScript types are up to date.');
         @unlink($generatedTypesFile);
+
         return 0;
     }
 }

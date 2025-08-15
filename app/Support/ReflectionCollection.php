@@ -14,7 +14,7 @@ class ReflectionCollection extends Collection
 
         $classes = collect($files)->map(function ($file) {
             $class = str_replace(
-                [base_path() . '/', 'app/', '.php', '/'],
+                [base_path().'/', 'app/', '.php', '/'],
                 ['', 'App/', '', '\\'],
                 $file->getPathname()
             );

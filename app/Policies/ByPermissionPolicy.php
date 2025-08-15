@@ -2,13 +2,12 @@
 
 namespace App\Policies;
 
-
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Gate;
 use App\Enums\PermissionEnum;
 use App\Models\User;
 use App\Support\PolicyUtils;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Policy to manage permissions based on user permissions
@@ -50,11 +49,11 @@ class ByPermissionPolicy
      */
     public function __call($method, $arguments): Response
     {
-        if (! defined(PermissionEnum::class . '::' . strtoupper($method))) {
+        if (! defined(PermissionEnum::class.'::'.strtoupper($method))) {
             throw new \BadMethodCallException("Method {$method} does not exist.");
         }
 
-        $permission = constant(PermissionEnum::class . '::' . strtoupper($method));
+        $permission = constant(PermissionEnum::class.'::'.strtoupper($method));
 
         $before = $this->before($arguments[0], $arguments[1], $permission);
         if ($before->denied()) {
