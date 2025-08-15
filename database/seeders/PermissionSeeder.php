@@ -59,5 +59,12 @@ class PermissionSeeder extends Seeder
                 );
             });
         });
+
+        // Sync permissions for default roles
+        collect(GuardEnum::cases())->each(function (GuardEnum $guardEnum) {
+            $role = Role::findByName(RoleEnum::SUPER_ADMIN->value, $guardEnum->value);
+            $permissions = Permission::where('guard_name', $guardEnum->value)->pluck('name');
+            $role->syncPermissions($permissions);
+        });
     }
 }
