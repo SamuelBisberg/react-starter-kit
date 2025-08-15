@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\GuardEnum;
+use App\Enums\RoleEnum;
 use App\Traits\InteractsWithTeam;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -69,6 +70,12 @@ class User extends Authenticatable implements FilamentUser, HasMedia
 
     public function canAccessPanel(Panel $panel): bool
     {
+        setPermissionsTeamId($this->getCurrentTeam());
+
+        if ($this->hasRole(RoleEnum::SUPER_ADMIN)) {
+            return true;
+        }
+
         return match ($panel->getId()) {
             'admin' => $this->hasPermissionTo('view', GuardEnum::ADMIN->value),
             // Add access for other panels here
