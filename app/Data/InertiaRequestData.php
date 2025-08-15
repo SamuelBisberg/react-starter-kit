@@ -3,7 +3,6 @@
 namespace App\Data;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\AlwaysProp;
 use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\RecordTypeScriptType;
@@ -18,6 +17,8 @@ class InertiaRequestData extends Data
 
         public ?UserData $user,
 
+        public ?TeamData $team,
+
         #[TypeScriptType('string[]')]
         public \Closure $can,
 
@@ -29,13 +30,15 @@ class InertiaRequestData extends Data
 
     public static function fromMiddleware(Request $request, AlwaysProp $errors): self
     {
+        $user = $request->user();
+        $currentTeam = $user?->getCurrentTeam();
+
         return new self(
             errors: $errors,
-            user: Auth::check() ? UserData::from($request->user()) : null,
-            can: fn () => [
-                // TODO: Add your permissions here
-            ],
-            ziggy: fn (): array => [
+            user: $user ? UserData::from($user) : null,
+            team: $currentTeam ? TeamData::from($currentTeam) : null,
+            can: fn() => $user?->getPermissionsViaRoles() ?: [],
+            ziggy: fn(): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
