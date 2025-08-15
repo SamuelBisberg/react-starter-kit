@@ -4,14 +4,15 @@
 
 This is a fork of the [Laravel + React Starter Kit](https://github.com/laravel/react-starter-kit) with my additional features and improvements. Such as:
 
+- **Authorization**: Built-in support for user roles and permissions. See [docs/authorization.md](docs/authorization.md) for more details.
+- **Authentication & Workos**: In addition to Laravel's built-in authentication, [WorkOS](https://workos.com) is integrated for SSO and OAuth flows.
+- **Sail Included**: Docker support with Laravel Sail for easy local development.
+- **Admin Panel**: Built with [Filament](https://filamentadmin.com/) for a beautiful and responsive admin interface.
 - **Laravel Debugbar**: Integrated for debugging and profiling.
 - **Laravel Data & Typescript**: Utilizes [spatie/laravel-data](https://spatie.be/docs/laravel-data) for data handling and [spatie/typescript-transformer](https://spatie.be/docs/typescript-transformer/v2/laravel) for TypeScript support.
 - **Laravel Translatable & Translations**: Fully translated into Hebrew & supports translatable columns with [spatie/laravel-translatable](https://spatie.be/docs/laravel-translatable)
 - **MinIO & Media Library**: For file uploads and media management.
-- **Sail Included**: Docker support with Laravel Sail for easy local development.
 - **Blueprint**: Uses [laravel-shift/blueprint](https://blueprint.laravelshift.com/) for rapid application development.
-- **Workos**: Integrated for SSO and OAuth flows with [workos.com](https://workos.com).
-- **Admin Panel**: Built with [Filament](https://filamentadmin.com/) for a beautiful and responsive admin interface.
 - **Backup**: Integrated with [spatie/laravel-backup](https://spatie.be/docs/laravel-backup) for easy backup management.
 - **Monitoring**: Integrated with [laravel-pulse](https://laravel.com/docs/pulse) for application monitoring.
 
@@ -171,9 +172,11 @@ In addition to the default validation rules, We have added the following custom 
 
 - **Phone**: Validates that the input is a valid phone number using the package [propaganistas/laravel-phone](https://github.com/propaganistas/laravel-phone).
 
-## Workos
+## Authentication & WorkOS
 
-The application integrates with [WorkOS](https://workos.com) for SSO and OAuth flows. You can enable it in the `.env` file:
+In addition to Laravel's built-in authentication, the application integrates with [WorkOS](https://workos.com) for Single Sign-On (SSO) and OAuth flows.
+
+You can enable it in the `.env` file:
 
 | Environment Variable   | Description & How to get it                                                                         |
 | ---------------------- | --------------------------------------------------------------------------------------------------- |
