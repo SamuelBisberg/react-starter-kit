@@ -9,10 +9,7 @@ function Index({ data, user }: Props) {
   const Layout = user ? AppLayout : AuthLayout;
 
   return (
-    <Layout
-      title="Playground"
-      description="Playground for testing and experimenting with features"
-    >
+    <Layout title="Playground" description="Playground for testing and experimenting with features">
       <pre>{JSON.stringify(data, null, 2)}</pre>
     </Layout>
   );
