@@ -2,15 +2,16 @@
 
 namespace App\Policies;
 
-use App\Enums\PermissionEnum;
+use App\Enums\WebPermissionEnum;
 use App\Models\Team;
 use App\Models\User;
+use App\Policies\Roles\WebPermissionPolicy;
 use App\Support\PolicyUtils;
 use Illuminate\Auth\Access\Response;
 
-class TeamPolicy extends ByPermissionPolicy
+class TeamPolicy extends WebPermissionPolicy
 {
-    protected function after(User $user, $model, PermissionEnum $permission): Response
+    public function after(User $user, $model, WebPermissionEnum $permission): Response
     {
         return PolicyUtils::isOwner($user, $model) ?
             Response::allow() : Response::denyAsNotFound();

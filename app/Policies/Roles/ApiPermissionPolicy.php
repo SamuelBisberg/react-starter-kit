@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Roles;
 
-use App\Enums\PermissionEnum;
+use App\Enums\ApiPermissionEnum;
 use App\Models\User;
 use App\Support\PolicyUtils;
 use Illuminate\Auth\Access\Response;
@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Gate;
 /**
  * Policy to manage permissions based on user permissions
  */
-class ByPermissionPolicy
+class ApiPermissionPolicy
 {
     /**
      * Determine if the user can perform the action on the model.
      */
-    protected function can(User $user, Model|string $model, PermissionEnum $permission): Response
+    protected function can(User $user, Model|string $model, ApiPermissionEnum $permission): Response
     {
         return Gate::allowIf(
             PolicyUtils::isStaffMember($user) ||
@@ -30,7 +30,7 @@ class ByPermissionPolicy
      * Apply before hook for permission checks.
      * Use in derived if you want to early return a response.
      */
-    protected function before(User $user, Model|string $model, PermissionEnum $permission): Response
+    protected function before(User $user, Model|string $model, ApiPermissionEnum $permission): Response
     {
         return Response::allow();
     }
@@ -39,7 +39,7 @@ class ByPermissionPolicy
      * Apply after hook for permission checks.
      * Use in derived if you add additional checks for allowing.
      */
-    protected function after(User $user, Model|string $model, PermissionEnum $permission): Response
+    protected function after(User $user, Model|string $model, ApiPermissionEnum $permission): Response
     {
         return Response::denyAsNotFound();
     }
@@ -49,11 +49,11 @@ class ByPermissionPolicy
      */
     public function __call($method, $arguments): Response
     {
-        if (! defined(PermissionEnum::class.'::'.strtoupper($method))) {
+        if (! defined(ApiPermissionEnum::class.'::'.strtoupper($method))) {
             throw new \BadMethodCallException("Method {$method} does not exist.");
         }
 
-        $permission = constant(PermissionEnum::class.'::'.strtoupper($method));
+        $permission = constant(ApiPermissionEnum::class.'::'.strtoupper($method));
 
         $before = $this->before($arguments[0], $arguments[1], $permission);
         if ($before->denied()) {
