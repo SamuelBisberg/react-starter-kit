@@ -4,8 +4,9 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Enums\AdminPermissionEnum;
+use App\Enums\AdminRoleEnum;
 use App\Enums\GuardEnum;
-use App\Enums\RoleEnum;
 use App\Traits\InteractsWithTeam;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -58,6 +59,14 @@ class User extends Authenticatable implements FilamentUser, HasMedia
         ];
     }
 
+    public function guardName()
+    {
+        return [
+            GuardEnum::WEB->value,
+            GuardEnum::ADMIN->value,
+        ];
+    }
+
     public function teams(): BelongsToMany
     {
         return $this->morphToMany(Team::class, 'model', 'model_has_roles');
@@ -72,12 +81,12 @@ class User extends Authenticatable implements FilamentUser, HasMedia
     {
         setPermissionsTeamId($this->getCurrentTeam());
 
-        if ($this->hasRole(RoleEnum::SUPER_ADMIN)) {
+        if ($this->hasRole(AdminRoleEnum::SUPER_ADMIN)) {
             return true;
         }
 
         return match ($panel->getId()) {
-            'admin' => $this->hasPermissionTo('view', GuardEnum::ADMIN->value),
+            'admin' => $this->hasPermissionTo(AdminPermissionEnum::ACCESS, GuardEnum::ADMIN->value),
             // Add access for other panels here
             default => false,
         };
