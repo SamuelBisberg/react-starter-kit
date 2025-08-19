@@ -63,5 +63,13 @@
     "Website login for regular users": "Website login for regular users",
     "auth.failed": "These credentials do not match our records.",
     "auth.password": "Password",
-    "auth.throttle": "Too many login attempts. Please try again in :seconds seconds."
+    "auth.throttle": "Too many login attempts. Please try again in :seconds seconds.",
+    "Access Admin Panel": "Access Admin Panel",
+    "Manage Admin Settings": "Manage Admin Settings",
+    "Allows access to the admin panel": "Allows access to the admin panel",
+    "Allows managing admin settings": "Allows managing admin settings",
+    "All Access": "All Access",
+    "Read Only": "Read Only",
+    "Allows all actions on API endpoints": "Allows all actions on API endpoints",
+    "Allows only read access to API endpoints": "Allows only read access to API endpoints"
 }

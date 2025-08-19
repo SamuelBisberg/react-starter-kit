@@ -148,5 +148,13 @@
     "Team deleted successfully.": "הצוות נמחק בהצלחה.",
     "History": "היסטוריה",
     "Permissions related to viewing historical data and changes": "הרשאות לצפייה בנתונים היסטוריים ושינויים",
-    "Default Team": "צוות ברירת מחדל"
+    "Default Team": "צוות ברירת מחדל",
+    "Access Admin Panel": "גישה למערכת מנהל",
+    "Manage Admin Settings": "נהל הגדרות מנהל",
+    "Allows access to the admin panel": "מאפשר גישה ללוח הניהול",
+    "Allows managing admin settings": "מאפשר ניהול הגדרות מנהל",
+    "All Access": "כל הגישה",
+    "Read Only": "קרא רק",
+    "Allows all actions on API endpoints": "מאפשר את כל הפעולות בנקודות קצה של API",
+    "Allows only read access to API endpoints": "מאפשר רק לקרוא גישה לנקודות קצה של API"
 }
