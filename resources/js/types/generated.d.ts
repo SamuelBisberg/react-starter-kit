@@ -24,6 +24,9 @@ declare namespace App.Data {
   };
 }
 declare namespace App.Enums {
+  export type AdminPermissionEnum = 'access' | 'manage';
+  export type AdminRoleEnum = 'super_admin' | 'admin';
+  export type ApiPermissionEnum = 'all_access' | 'read_only';
   export type GuardEnum = 'web' | 'api' | 'admin';
   export type PermissionEnum =
     | 'view'
@@ -43,4 +46,21 @@ declare namespace App.Enums {
     | 'manage_permissions';
   export type PermissionTagEnum = 'records' | 'history' | 'import_export' | 'admin' | 'security' | 'collaboration' | 'system';
   export type RoleEnum = 'super-admin' | 'admin' | 'user' | 'viewer';
+  export type WebPermissionEnum =
+    | 'view'
+    | 'create'
+    | 'update'
+    | 'delete'
+    | 'export'
+    | 'import'
+    | 'archive'
+    | 'restore'
+    | 'force_delete'
+    | 'duplicate'
+    | 'merge'
+    | 'comment'
+    | 'assign'
+    | 'manage_settings'
+    | 'manage_permissions';
+  export type WebRoleEnum = 'admin' | 'user' | 'viewer';
 }
