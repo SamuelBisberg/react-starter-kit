@@ -32,7 +32,7 @@ class EditPermission extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        unset($data["ability"], $data["class"]);
+        unset($data['ability'], $data['class']);
 
         return $data;
     }

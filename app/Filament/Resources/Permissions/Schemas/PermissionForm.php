@@ -2,13 +2,17 @@
 
 namespace App\Filament\Resources\Permissions\Schemas;
 
+use App\Enums\AdminPermissionEnum;
+use App\Enums\ApiPermissionEnum;
 use App\Enums\GuardEnum;
-use App\Enums\PermissionEnum;
+use App\Enums\PermissionTagEnum;
+use App\Enums\WebPermissionEnum;
 use App\Support\ReflectionCollection;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Tags\Tag;
 
 class PermissionForm
 {
@@ -17,7 +21,11 @@ class PermissionForm
         return $schema
             ->components([
                 Select::make('ability')
-                    ->options(PermissionEnum::plucked())
+                    ->options(
+                        collect(WebPermissionEnum::plucked())
+                            ->merge(ApiPermissionEnum::plucked())
+                            ->merge(AdminPermissionEnum::plucked())
+                    )
                     ->placeholder('Select ability')
                     ->label('Ability')
                     ->reactive()
@@ -25,7 +33,7 @@ class PermissionForm
 
                 Select::make('class')
                     ->options(
-                        ReflectionCollection::fromDirectory("Models")
+                        ReflectionCollection::fromDirectory('Models')
                             ->isSubclassOf(Model::class)
                             ->getClassNames()
                             ->map(fn($class) => [
@@ -48,6 +56,14 @@ class PermissionForm
                 Select::make('guard_name')
                     ->required()
                     ->options(GuardEnum::plucked()),
+
+                Select::make('tags.name')
+                    ->required()
+                    ->label('Tag')
+                    ->relationship('tags', 'name', fn($query) => $query->distinct(false))
+                    ->mutateDehydratedStateUsing(function ($state, $record) {
+                        return Tag::find($state)->name;
+                    }),
             ]);
     }
 }

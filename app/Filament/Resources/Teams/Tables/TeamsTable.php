@@ -14,7 +14,7 @@ class TeamsTable
     public static function configure(Table $table): Table
     {
         return $table
-            ->defaultSort(fn($query) => $query->orderBy('owner_id')->orderBy('order_column'))
+            ->defaultSort(fn ($query) => $query->orderBy('owner_id')->orderBy('order_column'))
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),

@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\Permissions\Tables;
 
+use App\Enums\AdminPermissionEnum;
+use App\Enums\ApiPermissionEnum;
 use App\Enums\GuardEnum;
-use App\Enums\PermissionEnum;
+use App\Enums\WebPermissionEnum;
 use App\Support\ReflectionCollection;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -25,26 +27,28 @@ class PermissionsTable
                     ->formatStateUsing(function ($state) {
                         if (strpos($state, ':') !== false) {
                             [$can, $on] = explode(':', $state, 2);
+
                             return "can: {$can} on: {$on}";
                         }
+
                         return $state;
                     })
                     ->badge()
                     ->searchable(),
                 IconColumn::make('guard_name')
-                    ->icon(fn($record) => match (GuardEnum::tryFrom($record->guard_name)) {
+                    ->icon(fn ($record) => match (GuardEnum::tryFrom($record->guard_name)) {
                         GuardEnum::ADMIN => Heroicon::User,
                         GuardEnum::WEB => Heroicon::UserGroup,
                         GuardEnum::API => Heroicon::Key,
                         default => Heroicon::ShieldCheck,
                     })
-                    ->color(fn($record) => match (GuardEnum::tryFrom($record->guard_name)) {
+                    ->color(fn ($record) => match (GuardEnum::tryFrom($record->guard_name)) {
                         GuardEnum::ADMIN => 'info',
                         GuardEnum::WEB => 'primary',
                         GuardEnum::API => 'success',
                         default => 'warning',
                     })
-                    ->tooltip(fn($record) => $record->guard_name)
+                    ->tooltip(fn ($record) => $record->guard_name)
                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
@@ -62,24 +66,29 @@ class PermissionsTable
                 SelectFilter::make('class')
                     ->label('Class')
                     ->options(
-                        ReflectionCollection::fromDirectory("Models")
+                        ReflectionCollection::fromDirectory('Models')
                             ->isSubclassOf(Model::class)
                             ->getClassNames()
-                            ->map(fn($class) => [
+                            ->map(fn ($class) => [
                                 'value' => $class,
                                 'label' => class_basename($class),
                             ])
                             ->pluck('label', 'value')
                     )
-                    ->query(fn($query, $data) => $query->when($data['value'] ?? null, function ($query) use ($data) {
+                    ->query(fn ($query, $data) => $query->when($data['value'] ?? null, function ($query) use ($data) {
                         $value = str_replace('\\', '\\\\', $data['value']);
+
                         return $query->where('name', 'like', "%{$value}");
                     })),
 
                 SelectFilter::make('ability')
                     ->label('Ability')
-                    ->options(PermissionEnum::plucked())
-                    ->query(fn($query, $data) => $query->when($data['value'] ?? null, fn($query) => $query->where('name', 'like', "{$data['value']}%"))),
+                    ->options(
+                        collect(WebPermissionEnum::plucked())
+                            ->merge(ApiPermissionEnum::plucked())
+                            ->merge(AdminPermissionEnum::plucked())
+                    )
+                    ->query(fn ($query, $data) => $query->when($data['value'] ?? null, fn ($query) => $query->where('name', 'like', "{$data['value']}%"))),
             ])
             ->recordActions([
                 EditAction::make(),
