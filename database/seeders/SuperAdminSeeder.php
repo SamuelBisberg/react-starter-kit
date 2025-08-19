@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Enums\RoleEnum;
+use App\Enums\AdminRoleEnum;
+use App\Enums\GuardEnum;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class SuperAdminSeeder extends Seeder
 {
@@ -30,6 +32,8 @@ class SuperAdminSeeder extends Seeder
             ]));
         }
 
-        $superAdmin->assignRole(RoleEnum::SUPER_ADMIN);
+        $superAdmin->assignRole(
+            Role::findByName(AdminRoleEnum::SUPER_ADMIN->value, GuardEnum::ADMIN->value)
+        );
     }
 }
