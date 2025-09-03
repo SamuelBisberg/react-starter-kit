@@ -6,6 +6,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use ReflectionClass;
 
+/**
+ * @extends Illuminate\Support\Collection<ReflectionClass>
+ */
 class ReflectionCollection extends Collection
 {
     public static function fromDirectory(string $directory): self
@@ -27,23 +30,31 @@ class ReflectionCollection extends Collection
 
     public function isInstantiable(): self
     {
-        return $this->filter(function (ReflectionClass $class) {
-            return $class->isInstantiable();
-        });
+        return $this->filter(fn (ReflectionClass $class) => $class->isInstantiable())
+            ->values();
     }
 
-    public function isSubclassOf(string $class): self
+    public function isSubclassOf(string ...$classes): self
     {
-        return $this->filter(function (ReflectionClass $reflectionClass) use ($class) {
-            return $reflectionClass->isSubclassOf($class);
-        });
+        return $this->filter(
+            fn (ReflectionClass $reflectionClass) => collect($classes)
+                ->some(fn ($class) => $reflectionClass->isSubclassOf($class))
+        )->values();
     }
 
-    public function usesTrait(string $trait): self
+    public function usesTrait(string ...$traits): self
     {
-        return $this->filter(function (ReflectionClass $class) use ($trait) {
-            return in_array($trait, $class->getTraitNames());
-        });
+        return $this->filter(
+            fn (ReflectionClass $class) => ! empty(array_intersect($traits, $class->getTraitNames()))
+        )->values();
+    }
+
+    public function implementsInterface(string ...$interfaces): self
+    {
+        return $this->filter(
+            fn (ReflectionClass $class) => collect($interfaces)
+                ->some(fn ($interface) => $class->implementsInterface($interface))
+        )->values();
     }
 
     /**
