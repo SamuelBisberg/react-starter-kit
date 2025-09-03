@@ -159,5 +159,8 @@
     "Allows only read access to API endpoints": "מאפשר רק לקרוא גישה לנקודות קצה של API",
     "Read & Write": "לקרוא ולכתוב",
     "Access to read and write resources": "גישה לקריאה ולכתוב משאבים",
-    "Access to read resources only": "גישה לקריאה משאבים בלבד"
+    "Access to read resources only": "גישה לקריאה משאבים בלבד",
+    "Default": "בְּרִירַת מֶחדָל",
+    "Images": "תמונות",
+    "Documents": "מסמכים"
 }

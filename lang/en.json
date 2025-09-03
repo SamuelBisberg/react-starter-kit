@@ -74,5 +74,8 @@
     "Allows only read access to API endpoints": "Allows only read access to API endpoints",
     "Read & Write": "Read & Write",
     "Access to read and write resources": "Access to read and write resources",
-    "Access to read resources only": "Access to read resources only"
+    "Access to read resources only": "Access to read resources only",
+    "Default": "Default",
+    "Images": "Images",
+    "Documents": "Documents"
 }
