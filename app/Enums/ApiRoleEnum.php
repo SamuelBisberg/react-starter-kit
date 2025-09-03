@@ -36,7 +36,7 @@ enum ApiRoleEnum: string
         return match ($this) {
             self::READ_WRITE => ApiPermissionEnum::cases(),
             self::READ_ONLY => [
-                ApiPermissionEnum::READ_ONLY
+                ApiPermissionEnum::READ_ONLY,
             ],
         };
     }

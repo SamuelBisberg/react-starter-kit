@@ -5,7 +5,6 @@ namespace App\Filament\Resources\Permissions\Schemas;
 use App\Enums\AdminPermissionEnum;
 use App\Enums\ApiPermissionEnum;
 use App\Enums\GuardEnum;
-use App\Enums\PermissionTagEnum;
 use App\Enums\WebPermissionEnum;
 use App\Support\ReflectionCollection;
 use Filament\Forms\Components\Select;
@@ -29,14 +28,14 @@ class PermissionForm
                     ->placeholder('Select ability')
                     ->label('Ability')
                     ->reactive()
-                    ->afterStateUpdated(fn($state, callable $set, $get) => $set('name', $get('class') ? "$state:{$get('class')}" : $state)),
+                    ->afterStateUpdated(fn ($state, callable $set, $get) => $set('name', $get('class') ? "$state:{$get('class')}" : $state)),
 
                 Select::make('class')
                     ->options(
                         ReflectionCollection::fromDirectory('Models')
                             ->isSubclassOf(Model::class)
                             ->getClassNames()
-                            ->map(fn($class) => [
+                            ->map(fn ($class) => [
                                 'value' => $class,
                                 'label' => class_basename($class),
                             ])
@@ -46,7 +45,7 @@ class PermissionForm
                     ->reactive()
                     ->placeholder('Select model')
                     ->label('Model')
-                    ->afterStateUpdated(fn($state, callable $set, $get) => $set('name', $state ? "{$get('ability')}:$state" : $get('ability'))),
+                    ->afterStateUpdated(fn ($state, callable $set, $get) => $set('name', $state ? "{$get('ability')}:$state" : $get('ability'))),
 
                 TextInput::make('name')
                     ->required()
@@ -60,7 +59,7 @@ class PermissionForm
                 Select::make('tags.name')
                     ->required()
                     ->label('Tag')
-                    ->relationship('tags', 'name', fn($query) => $query->distinct(false))
+                    ->relationship('tags', 'name', fn ($query) => $query->distinct(false))
                     ->mutateDehydratedStateUsing(function ($state, $record) {
                         return Tag::find($state)->name;
                     }),

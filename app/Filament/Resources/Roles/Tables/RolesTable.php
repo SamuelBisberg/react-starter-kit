@@ -21,7 +21,7 @@ class RolesTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->formatStateUsing(fn($state, $record) => match (GuardEnum::from($record->guard_name)) {
+                    ->formatStateUsing(fn ($state, $record) => match (GuardEnum::from($record->guard_name)) {
                         GuardEnum::ADMIN => AdminRoleEnum::from($state)->label(),
                         GuardEnum::WEB => WebRoleEnum::from($state)->label(),
                         GuardEnum::API => ApiRoleEnum::from($state)->label(),
@@ -29,19 +29,19 @@ class RolesTable
                     })
                     ->searchable(),
                 IconColumn::make('guard_name')
-                    ->icon(fn($record) => match (GuardEnum::tryFrom($record->guard_name)) {
+                    ->icon(fn ($record) => match (GuardEnum::tryFrom($record->guard_name)) {
                         GuardEnum::ADMIN => Heroicon::User,
                         GuardEnum::WEB => Heroicon::UserGroup,
                         GuardEnum::API => Heroicon::Key,
                         default => Heroicon::ShieldCheck,
                     })
-                    ->color(fn($record) => match (GuardEnum::tryFrom($record->guard_name)) {
+                    ->color(fn ($record) => match (GuardEnum::tryFrom($record->guard_name)) {
                         GuardEnum::ADMIN => 'info',
                         GuardEnum::WEB => 'primary',
                         GuardEnum::API => 'success',
                         default => 'warning',
                     })
-                    ->tooltip(fn($record) => $record->guard_name)
+                    ->tooltip(fn ($record) => $record->guard_name)
                     ->searchable(),
                 TextColumn::make('team.name')
                     ->label('Team')

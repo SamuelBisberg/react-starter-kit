@@ -28,16 +28,16 @@ class ListRoles extends ListRecords
     {
         return collect(GuardEnum::cases())
             ->map(
-                fn($guard) => Tab::make($guard->value)
+                fn ($guard) => Tab::make($guard->value)
                     ->label($guard->label())
                     ->badge(Role::query()->where('guard_name', $guard->value)->count())
-                    ->modifyQueryUsing(fn(Builder $query) => $query->where('guard_name', $guard->value))
+                    ->modifyQueryUsing(fn (Builder $query) => $query->where('guard_name', $guard->value))
             )
             ->merge([
                 Tab::make('all')
                     ->label('All')
                     ->badge(Role::query()->count())
-                    ->modifyQueryUsing(fn(Builder $query) => $query),
+                    ->modifyQueryUsing(fn (Builder $query) => $query),
             ])
             ->toArray();
     }
