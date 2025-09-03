@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\AdminPermissionEnum;
 use App\Enums\AdminRoleEnum;
 use App\Enums\GuardEnum;
+use App\Interfaces\HasTitleAttributeName;
 use App\Traits\InteractsWithTeam;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -19,7 +20,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser, HasMedia
+class User extends Authenticatable implements FilamentUser, HasMedia, HasTitleAttributeName
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, HasRoles, InteractsWithMedia, InteractsWithTeam, Notifiable;
@@ -45,6 +46,11 @@ class User extends Authenticatable implements FilamentUser, HasMedia
         'password',
         'remember_token',
     ];
+
+    public static function getTitleAttributeName(): string
+    {
+        return 'name';
+    }
 
     /**
      * Get the attributes that should be cast.
