@@ -156,5 +156,8 @@
     "All Access": "כל הגישה",
     "Read Only": "קרא רק",
     "Allows all actions on API endpoints": "מאפשר את כל הפעולות בנקודות קצה של API",
-    "Allows only read access to API endpoints": "מאפשר רק לקרוא גישה לנקודות קצה של API"
+    "Allows only read access to API endpoints": "מאפשר רק לקרוא גישה לנקודות קצה של API",
+    "Read & Write": "לקרוא ולכתוב",
+    "Access to read and write resources": "גישה לקריאה ולכתוב משאבים",
+    "Access to read resources only": "גישה לקריאה משאבים בלבד"
 }
