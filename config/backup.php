@@ -215,7 +215,7 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => env('MAIL_TO_ADDRESS_IT', 'your@example.com'),
+            'to' => config('app.email-addresses.maintenance'),
 
             'from' => [
                 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),

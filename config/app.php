@@ -131,4 +131,9 @@ return [
         'password' => env('APP_SUPER_ADMIN_PASSWORD', 'password'),
     ],
 
+    // email addresses of the application administrators
+    'email-addresses' => [
+        'maintenance' => env('MAIL_TO_ADDRESS_IT', 'maintenance@example.com'),
+    ],
+
 ];
