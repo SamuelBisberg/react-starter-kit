@@ -14,7 +14,7 @@ This is a fork of the [Laravel + React Starter Kit](https://github.com/laravel/r
 - **MinIO & Media Library**: For file uploads and media management.
 - **Blueprint**: Uses [laravel-shift/blueprint](https://blueprint.laravelshift.com/) for rapid application development.
 - **Backup**: Integrated with [spatie/laravel-backup](https://spatie.be/docs/laravel-backup) for easy backup management.
-- **Monitoring**: Integrated with [laravel-pulse](https://laravel.com/docs/pulse) for application monitoring.
+- **Monitoring**: Integrated with [laravel-pulse](https://laravel.com/docs/pulse), [laravel-horizon](https://laravel.com/docs/horizon), and [log-viewer](https://github.com/laravel/log-viewer) for comprehensive monitoring and logging.
 
 And much more!
 
@@ -201,3 +201,13 @@ The application uses [spatie/laravel-backup](https://spatie.be/docs/laravel-back
 | `BACKUP_ARCHIVE_PASSWORD` | Optional password to encrypt backup archives                 |
 
 You can also monitor the backup status using the `BackupHealthWidget` in the admin panel.
+
+## App Monitoring
+
+The starter kit integrates with:
+
+- [Laravel Pulse](https://laravel.com/docs/pulse) for application health monitoring.
+- [Laravel Horizon](https://laravel.com/docs/horizon) for monitoring Redis queues.
+- [Log Viewer](https://github.com/laravel/log-viewer) for viewing and managing log files.
+
+**Accessing Monitoring Tools:** Only users with the `access` permission on the `admin` guard can access these tools.
