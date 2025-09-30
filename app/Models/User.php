@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\AdminPermissionEnum;
 use App\Enums\AdminRoleEnum;
 use App\Enums\GuardEnum;
+use App\Enums\UserMediaCollectionEum;
 use App\Interfaces\HasTitleAttributeName;
 use App\Traits\InteractsWithTeam;
 use Filament\Models\Contracts\FilamentUser;
@@ -18,6 +19,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasMedia, HasTitleAttributeName
@@ -71,6 +73,44 @@ class User extends Authenticatable implements FilamentUser, HasMedia, HasTitleAt
             GuardEnum::WEB->value,
             GuardEnum::ADMIN->value,
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        // Profile Picture
+        $this->addMediaCollection(UserMediaCollectionEum::PROFILE_PICTURE->value)
+            ->useDisk(UserMediaCollectionEum::PROFILE_PICTURE->disk())
+            ->singleFile()
+            ->useFallbackUrl(url('images/fallback-profile-image.png'))
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml'])
+            ->registerMediaConversions(function (?Media $media = null) {
+                $this->addMediaConversion(UserMediaCollectionEum::PROFILE_PICTURE->value.'-thumb')
+                    ->width(100)
+                    ->height(100)
+                    ->sharpen(10)
+                    ->nonQueued();
+            });
+
+        // Images
+        $this->addMediaCollection(UserMediaCollectionEum::IMAGES->value)
+            ->useDisk(UserMediaCollectionEum::IMAGES->disk())
+            ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp', 'image/svg+xml']);
+
+        // Documents
+        $this->addMediaCollection(UserMediaCollectionEum::DOCS->value)
+            ->useDisk(UserMediaCollectionEum::DOCS->disk())
+            ->acceptsMimeTypes([
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+                'image/svg+xml',
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'text/plain',
+            ]);
     }
 
     public function teams(): BelongsToMany
