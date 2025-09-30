@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Enums\AdminPermissionEnum;
 use App\Enums\AdminRoleEnum;
 use App\Enums\GuardEnum;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Opcodes\LogViewer\Facades\LogViewer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        LogViewer::auth(function (Request $request) {
+            setPermissionsTeamId($request->user()?->getCurrentTeam());
+
+            return $request->user()?->can(AdminPermissionEnum::ACCESS, GuardEnum::ADMIN->value) ?? false;
+        });
     }
 }
